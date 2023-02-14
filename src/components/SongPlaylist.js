@@ -1,15 +1,22 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addSong, removeSong } from "../store/slices/songsSlice";
 import { createRandomSong } from "../data";
 
 function SongPlaylist() {
   // To Do:
   // Get list of songs
-  const songPlaylist = [];
+  // const songPlaylist = [];
+  const songPlaylist = useSelector((state)=>state.songs);
+  const dispatch = useDispatch();
 
   const handleSongAdd = (song) => {
+    dispatch(addSong(song));
     // To Do:
     // Add song to list of songs
+
   };
   const handleSongRemove = (song) => {
+    dispatch(removeSong(song));
     // To Do:
     // Remove song from list of songs
   };
