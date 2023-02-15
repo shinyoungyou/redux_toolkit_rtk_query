@@ -2,26 +2,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeCar } from '../store/slices/carsSlice';
 
 function CarList() {
-  const { cars, searchTerm } = useSelector((state)=>state.cars);
-  const { name } = useSelector((state)=>state.form);
+  const { cars, name } = useSelector(({ form, cars: { data, searchTerm } }) => {
+    if (searchTerm == ''){
+      return {
+        cars: data,
+        name: form.name
+      };
+    }
+    const filteredCars = data.filter((car)=>car.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    return {
+      cars: filteredCars,
+      name: form.name
+    }
+  });
   const dispatch = useDispatch();
 
   const handleCarDelete = (car) => {
-    console.log(car);
     dispatch(removeCar(car.id));
   };
-
-  const handleSearchCars = () => {
-    if (searchTerm == ''){
-      return renderedCars;
-    } else {
-      renderedCars = cars.filter((car)=>{
-        car.name.includes(searchTerm);
-
-      })
-    }
-    
-  }
 
   const renderedCars = cars?.map((car) => {
     // DECIDE IF THIS CAR SHOULD BE BOLD
