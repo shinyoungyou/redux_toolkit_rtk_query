@@ -1,14 +1,12 @@
-import { configureStore, createAction } from '@reduxjs/toolkit';
-import { songsReducer } from './slices/songsSlice';
-import { moviesReducer } from './slices/moviesSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import carsReducer from './slices/carsSlice';
+import formReducer from './slices/formSlice';
 
 const store = configureStore({
   reducer: {
-    songs: songsReducer,
-    movies: moviesReducer
+    cars: carsReducer,
+    form: formReducer
   }
 })
 
-export const reset = createAction('app/reset');
-
-export { store };
+export default store;
